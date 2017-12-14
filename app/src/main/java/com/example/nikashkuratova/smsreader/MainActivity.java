@@ -115,9 +115,6 @@ public class MainActivity extends AppCompatActivity
                     msgData += cursor.getString(idx);
                     smsArray.add(msgData);
                 }
-                // use msgData
-                //nika = (TextView) findViewById(R.id.sms_view);
-                //nika.setText(msgData);
             } while (cursor.moveToNext());
         } else {
             // empty box, no SMS
