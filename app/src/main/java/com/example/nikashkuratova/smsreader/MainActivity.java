@@ -15,15 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS = 0;
-    private static final int REQUEST_SMS = 1;
     private static String[] PERMISSIONS_SMS = {Manifest.permission.READ_SMS};
     private TextView nika;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,22 +100,28 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showSMS() {
-        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, null);
+        //Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, null);
+        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, null, null, null);
+        listView = (ListView)findViewById(R.id.listview);
+        ArrayList<String> smsArray = new ArrayList<>();
 
         if (cursor.moveToFirst()) { // must check the result to prevent exception
             do {
                 String msgData = "";
                 for (int idx = 0; idx < cursor.getColumnCount(); idx++) {
-                    msgData += " " + cursor.getColumnName(idx) + ":" + cursor.getString(idx);
-
+                    msgData += cursor.getString(idx);
+                    smsArray.add(msgData);
                 }
                 // use msgData
-                nika = (TextView) findViewById(R.id.sms_view);
-                nika.setText(msgData);
+                //nika = (TextView) findViewById(R.id.sms_view);
+                //nika.setText(msgData);
             } while (cursor.moveToNext());
         } else {
             // empty box, no SMS
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, smsArray);
+        listView.setAdapter(adapter);
     }
 
     @Override
