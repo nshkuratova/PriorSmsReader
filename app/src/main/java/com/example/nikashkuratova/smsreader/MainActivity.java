@@ -101,9 +101,12 @@ public class MainActivity extends AppCompatActivity
 
     private void showSMS() {
         //Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, null);
-        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, null, null, null);
+
+        String WHERE_CONDITION = "address = \"Priorbank\"";
+        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
         listView = (ListView)findViewById(R.id.listview);
         ArrayList<String> smsArray = new ArrayList<>();
+
 
         if (cursor.moveToFirst()) { // must check the result to prevent exception
             do {
