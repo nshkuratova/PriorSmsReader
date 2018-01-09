@@ -2,8 +2,6 @@ package com.example.nikashkuratova.smsreader;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -99,28 +96,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void showSMS() {
-        //Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, null);
-
-        String WHERE_CONDITION = "address = \"Priorbank\"";
-        Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
-        listView = (ListView) findViewById(R.id.listview);
-        ArrayList<String> smsArray = new ArrayList<>();
-
-
-        if (cursor.moveToFirst()) { // must check the result to prevent exception
-            do {
-                String msgData = "";
-                for (int idx = 0; idx < cursor.getColumnCount(); idx++) {
-                    msgData += cursor.getString(idx);
-                    smsArray.add(msgData);
-                }
-            } while (cursor.moveToNext());
-        } else {
-            // empty box, no SMS
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, smsArray);
-        listView.setAdapter(adapter);
+        new SmsAsyncLoader(this).execute();
     }
 
     @Override
