@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity
 
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS = 0;
     private static String[] PERMISSIONS_SMS = {Manifest.permission.READ_SMS};
-    private TextView nika;
     ListView listView;
 
     @Override
@@ -45,10 +44,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
             // Contacts permissions have not been granted.
-
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_SMS)) {
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -56,14 +59,10 @@ public class MainActivity extends AppCompatActivity
                 // sees the explanation, try again to request the permission.
                 //todo add explanation
                 ActivityCompat.requestPermissions(this, PERMISSIONS_SMS, MY_PERMISSIONS_REQUEST_READ_SMS);
-            }
-            else {
+            } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this, PERMISSIONS_SMS, MY_PERMISSIONS_REQUEST_READ_SMS);
             }
-
-
-
         } else {
             // Contact permissions have been granted. Show the contacts fragment.
             Log.i("Info",
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     //todo nice screen to explain to turn on the permission
-                    finishAndRemoveTask ();
+                    finishAndRemoveTask();
                 }
                 return;
             }
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity
 
         String WHERE_CONDITION = "address = \"Priorbank\"";
         Cursor cursor = getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
-        listView = (ListView)findViewById(R.id.listview);
+        listView = (ListView) findViewById(R.id.listview);
         ArrayList<String> smsArray = new ArrayList<>();
 
 
