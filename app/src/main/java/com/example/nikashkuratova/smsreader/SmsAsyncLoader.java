@@ -1,26 +1,29 @@
 package com.example.nikashkuratova.smsreader;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import com.example.nikashkuratova.smsreader.Adaptor.SmsAdapter;
+import com.example.nikashkuratova.smsreader.Pojo.SmsMessage;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SmsAsyncLoader extends AsyncTask<Void, Void, ArrayList<String>> {
+public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     private Activity activity;
-    ArrayList<String> smsArray;
-    ListView listView;
+    private List<SmsMessage> smsArray;
+    private RecyclerView recyclerView;
 
     public SmsAsyncLoader(Activity pActivity) {
         activity = pActivity;
     }
 
     @Override
-    protected ArrayList<String> doInBackground(Void... voids) {
+    protected List<SmsMessage> doInBackground(Void... voids) {
         String WHERE_CONDITION = "address = \"Priorbank\"";
         Cursor cursor = activity.getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
         smsArray = new ArrayList<>();
@@ -31,7 +34,7 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, ArrayList<String>> {
                 String msgData = "";
                 for (int idx = 0; idx < cursor.getColumnCount(); idx++) {
                     msgData += cursor.getString(idx);
-                    smsArray.add(msgData);
+                    smsArray.add(new SmsMessage(msgData));
                 }
             } while (cursor.moveToNext());
         } else {
@@ -41,13 +44,14 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, ArrayList<String>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> strings) {
+    protected void onPostExecute(List<SmsMessage> strings) {
 
-        listView = (ListView) activity.findViewById(R.id.listview);
+        recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerview);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity,
-                android.R.layout.simple_list_item_1, smsArray);
-        listView.setAdapter(adapter);
-
+        SmsAdapter adapter = new SmsAdapter(smsArray);
+        recyclerView.setAdapter(adapter);
     }
 }
