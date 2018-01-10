@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--todo: not necessary wrapper ConstraintLayout for Recycler view (make Recycler root view). (it improves performance as every parent creates extra calculations)-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
