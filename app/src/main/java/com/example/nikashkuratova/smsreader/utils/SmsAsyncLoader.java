@@ -30,7 +30,6 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 
-
         //todo replace with wile(cursor.next())
         if (cursor.moveToFirst()) { // must check the result to prevent exception
             do {
@@ -40,9 +39,6 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
                     smsArray.add(new SmsMessage(msgData));
                 }
             } while (cursor.moveToNext());
-        } else {
-            //todo remove empty block
-            // empty box, no SMS
         }
         return smsArray;
     }
