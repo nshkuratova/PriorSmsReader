@@ -17,8 +17,6 @@ import java.util.List;
 public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     //todo potential memory leak: thread holds link to Activity
     private Activity activity;
-    //todo: unnecessary field (this link can be local). fields save state, and extra efforts always needed to have state correct during application life (this is design principe)
-    private List<SmsMessage> smsArray;
     private RecyclerView recyclerView;
 
     public SmsAsyncLoader(Activity pActivity) {
@@ -29,6 +27,7 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     protected List<SmsMessage> doInBackground(Void... voids) {
         String WHERE_CONDITION = "address = \"Priorbank\"";
         Cursor cursor = activity.getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
+        List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 
 
@@ -57,7 +56,7 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        SmsAdapter adapter = new SmsAdapter(smsArray);
+        SmsAdapter adapter = new SmsAdapter(strings);
         recyclerView.setAdapter(adapter);
     }
 }
