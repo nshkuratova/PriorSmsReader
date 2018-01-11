@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader;
+package com.example.nikashkuratova.smsreader.utils;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -7,13 +7,13 @@ import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.nikashkuratova.smsreader.R;
 import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//todo wrong package por util class
 public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     //todo potential memory leak: thread holds link to Activity
     private Activity activity;

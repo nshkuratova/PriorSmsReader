@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.nikashkuratova.smsreader.utils.PermissionCheckHelper;
+import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
 
 public class SmsDataActivity extends AppCompatActivity {
 
