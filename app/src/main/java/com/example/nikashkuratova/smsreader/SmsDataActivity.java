@@ -1,16 +1,14 @@
 package com.example.nikashkuratova.smsreader;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.nikashkuratova.smsreader.Utils.PermissionCheckHelper;
+import com.example.nikashkuratova.smsreader.utils.PermissionCheckHelper;
 
 public class SmsDataActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS = 0;
-    private static String[] PERMISSIONS_SMS = {Manifest.permission.READ_SMS};
 
 
     @Override

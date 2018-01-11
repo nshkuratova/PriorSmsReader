@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader.Pojo;
+package com.example.nikashkuratova.smsreader.pojo;
 
 public class SmsMessage {
     private String smsText;

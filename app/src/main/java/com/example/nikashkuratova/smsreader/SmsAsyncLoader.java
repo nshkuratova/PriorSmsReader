@@ -7,8 +7,8 @@ import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.nikashkuratova.smsreader.Adaptor.SmsAdapter;
-import com.example.nikashkuratova.smsreader.Pojo.SmsMessage;
+import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
+import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.ArrayList;
 import java.util.List;

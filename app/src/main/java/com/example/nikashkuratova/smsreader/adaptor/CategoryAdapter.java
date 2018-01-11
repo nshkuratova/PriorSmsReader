@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader.Adaptor;
+package com.example.nikashkuratova.smsreader.adaptor;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nikashkuratova.smsreader.Interface.RecyclerViewClickListener;
-import com.example.nikashkuratova.smsreader.Pojo.SmsCategory;
+import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
+import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 import com.example.nikashkuratova.smsreader.R;
 
 import java.util.List;

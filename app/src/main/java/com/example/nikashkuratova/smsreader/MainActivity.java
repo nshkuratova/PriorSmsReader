@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.nikashkuratova.smsreader.Adaptor.CategoryAdapter;
-import com.example.nikashkuratova.smsreader.Interface.RecyclerViewClickListener;
-import com.example.nikashkuratova.smsreader.Pojo.SmsCategory;
+import com.example.nikashkuratova.smsreader.adaptor.CategoryAdapter;
+import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
+import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 
 import java.util.ArrayList;
 import java.util.List;

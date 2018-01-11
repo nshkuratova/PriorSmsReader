@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader.Interface;
+package com.example.nikashkuratova.smsreader.listener;
 
 import android.view.View;
 
