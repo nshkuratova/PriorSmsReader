@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.nikashkuratova.smsreader.adaptor.CategoryAdapter;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
@@ -111,11 +112,11 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
         switch (id) {
             case R.id.action_settings:
                 break;
             case R.id.edit_categories:
+//todo make edit button visible
                 break;
         }
 
