@@ -1,6 +1,8 @@
 package com.example.nikashkuratova.smsreader;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -15,6 +17,8 @@ import android.view.View;
 import com.example.nikashkuratova.smsreader.adaptor.CategoryAdapter;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
 import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +29,20 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private List<SmsCategory> smsCategory;
-    CategoryAdapter adapter;
+    private CategoryAdapter adapter;
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            if (resultCode == RESULT_OK){
-                smsCategory.add(new SmsCategory(data.getStringExtra("enterName")));
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                smsCategory.add(new SmsCategory(data.getStringExtra("categoryName"), data.getStringExtra("searchString")));
                 adapter.notifyDataSetChanged();
+                String categoriesListtoJson = new Gson().toJson(smsCategory);
+                editor.putString("CategoriesList", categoriesListtoJson);
+                editor.commit();
             }
         }
     }
@@ -41,6 +50,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPref = getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+        smsCategory = new ArrayList<SmsCategory>();
+
+        Gson gson = new Gson();
+        String json = sharedPref.getString("CategoriesList", "");
+        if (json.isEmpty()){
+            smsCategory.add(new SmsCategory());
+        } else {
+            smsCategory =  gson.fromJson(json, new TypeToken<ArrayList<SmsCategory>>() {
+            }.getType());
+        }
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,9 +81,6 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        smsCategory = new ArrayList<SmsCategory>();
-        smsCategory.add(new SmsCategory());
-
         adapter = new CategoryAdapter(smsCategory, this);
         recyclerView.setAdapter(adapter);
     }
@@ -70,6 +90,13 @@ public class MainActivity extends AppCompatActivity
         super.onStart();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String categoriesListtoJson = new Gson().toJson(smsCategory);
+        editor.putString("CategoriesList", categoriesListtoJson);
+        editor.commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,10 +126,6 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SmsDataActivity.class);
             startActivity(intent);
         }
-
-    }
-
-    private void loadCategories(){
 
     }
 }
