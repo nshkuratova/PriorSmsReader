@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import com.example.nikashkuratova.smsreader.R;
-import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
+import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.ArrayList;
@@ -17,10 +14,11 @@ import java.util.List;
 public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     //todo potential memory leak: thread holds link to Activity
     private Activity activity;
-    private RecyclerView recyclerView;
+    private OnAsyncTaskCompleted listener;
 
-    public SmsAsyncLoader(Activity pActivity) {
+    public SmsAsyncLoader(Activity pActivity, OnAsyncTaskCompleted pListener) {
         activity = pActivity;
+        listener = pListener;
     }
 
     @Override
@@ -42,16 +40,9 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
         return smsArray;
     }
 
-    //todo make this helper class independent from target UI: create listener which retrieve list of SmsMessages and implement this this listener in Activity
     @Override
     protected void onPostExecute(List<SmsMessage> strings) {
+        listener.onTaskCompeted(strings);
 
-        recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerview);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(activity);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-
-        SmsAdapter adapter = new SmsAdapter(strings);
-        recyclerView.setAdapter(adapter);
     }
 }

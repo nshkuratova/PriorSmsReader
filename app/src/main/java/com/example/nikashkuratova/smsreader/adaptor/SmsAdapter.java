@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 import com.example.nikashkuratova.smsreader.R;
+import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.List;
 

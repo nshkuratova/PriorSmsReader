@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.nikashkuratova.smsreader.R;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
 import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
-import com.example.nikashkuratova.smsreader.R;
 
 import java.util.List;
 
