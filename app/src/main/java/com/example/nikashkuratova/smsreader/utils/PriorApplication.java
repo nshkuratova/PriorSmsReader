@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader;
+package com.example.nikashkuratova.smsreader.utils;
 
 import android.app.Application;
 
