@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
-    //todo potential memory leak: thread holds link to Activity
     private Activity activity;
     private OnAsyncTaskCompleted listener;
 
