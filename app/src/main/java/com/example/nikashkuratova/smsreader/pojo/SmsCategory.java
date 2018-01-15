@@ -4,7 +4,7 @@ public class SmsCategory {
     private String categoryName;
 
     public SmsCategory() {
-        this.categoryName = "Без категории";
+        this.categoryName = "Все sms";
     }
 
     public String getCategoryName() {
