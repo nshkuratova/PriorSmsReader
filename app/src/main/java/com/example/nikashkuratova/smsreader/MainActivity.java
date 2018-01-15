@@ -3,7 +3,6 @@ package com.example.nikashkuratova.smsreader;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +24,19 @@ public class MainActivity extends AppCompatActivity
         implements ActivityCompat.OnRequestPermissionsResultCallback, RecyclerViewClickListener {
 
     private RecyclerView recyclerView;
+    private List<SmsCategory> smsCategory;
+    CategoryAdapter adapter;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            if (resultCode == RESULT_OK){
+                smsCategory.add(new SmsCategory(data.getStringExtra("enterName")));
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddCategoryActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, AddCategoryActivity.class), 1);
             }
         });
 
@@ -46,10 +58,10 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        List<SmsCategory> smsCategory = new ArrayList<SmsCategory>();
+        smsCategory = new ArrayList<SmsCategory>();
         smsCategory.add(new SmsCategory());
 
-        CategoryAdapter adapter = new CategoryAdapter(smsCategory, this);
+        adapter = new CategoryAdapter(smsCategory, this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -87,6 +99,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SmsDataActivity.class);
             startActivity(intent);
         }
+
+    }
+
+    private void loadCategories(){
 
     }
 }

@@ -6,6 +6,9 @@ public class SmsCategory {
     public SmsCategory() {
         this.categoryName = "Все sms";
     }
+    public SmsCategory(String pNname) {
+        this.categoryName = pNname;
+    }
 
     public String getCategoryName() {
         return categoryName;
