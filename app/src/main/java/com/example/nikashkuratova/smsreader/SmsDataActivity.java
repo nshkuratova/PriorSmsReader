@@ -1,17 +1,23 @@
 package com.example.nikashkuratova.smsreader;
 
-import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
-import com.example.nikashkuratova.smsreader.Utils.PermissionCheckHelper;
+import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
+import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
+import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
+import com.example.nikashkuratova.smsreader.utils.PermissionCheckHelper;
+import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
+
+import java.util.List;
 
 public class SmsDataActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS = 0;
-    private static String[] PERMISSIONS_SMS = {Manifest.permission.READ_SMS};
-
+    private OnAsyncTaskCompleted listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +36,20 @@ public class SmsDataActivity extends AppCompatActivity {
 
 
     private void showSMS() {
-        new SmsAsyncLoader(this).execute();
+        listener = new OnAsyncTaskCompleted() {
+            @Override
+            public void onTaskCompeted(List<SmsMessage> messages) {
+                RecyclerView recyclerView;
+                recyclerView = (RecyclerView) SmsDataActivity.this.findViewById(R.id.recyclerview);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SmsDataActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setHasFixedSize(true);
+
+                SmsAdapter adapter = new SmsAdapter(messages);
+                recyclerView.setAdapter(adapter);
+            }
+        };
+        new SmsAsyncLoader(this, listener).execute();
     }
 
 
