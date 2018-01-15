@@ -56,13 +56,12 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = new Gson();
         String json = sharedPref.getString("CategoriesList", "");
-        if (json.isEmpty()){
+        if (json.isEmpty()) {
             smsCategory.add(new SmsCategory());
         } else {
-            smsCategory =  gson.fromJson(json, new TypeToken<ArrayList<SmsCategory>>() {
+            smsCategory = gson.fromJson(json, new TypeToken<ArrayList<SmsCategory>>() {
             }.getType());
         }
-
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -112,8 +111,12 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        switch (id) {
+            case R.id.action_settings:
+                break;
+            case R.id.edit_categories:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
