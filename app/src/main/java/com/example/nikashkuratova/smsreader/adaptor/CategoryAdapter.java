@@ -58,7 +58,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.isRemoveIconVisible = newValue;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView smsCategory;
         ImageButton editIcon;
         ImageButton removeIcon;
@@ -69,6 +69,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             editIcon = (ImageButton) itemView.findViewById(R.id.edit_btn);
             removeIcon = (ImageButton) itemView.findViewById(R.id.delete_btn);
             smsCategory.setOnClickListener(this);
+            removeIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    list.remove(getAdapterPosition());
+                    notifyItemRemoved(getAdapterPosition());
+                    notifyItemRangeChanged(getAdapterPosition(), list.size());
+                }
+            });
         }
 
         @Override
