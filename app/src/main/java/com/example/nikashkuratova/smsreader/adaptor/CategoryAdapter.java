@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.nikashkuratova.smsreader.R;
@@ -17,6 +18,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private static RecyclerViewClickListener itemListener;
     private List<SmsCategory> list;
+    private Boolean isEditIconVisible = false;
+    private Boolean isRemoveIconVisible = false;
 
     public CategoryAdapter(List<SmsCategory> list, RecyclerViewClickListener listener) {
         this.list = list;
@@ -36,6 +39,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(CategoryAdapter.ViewHolder holder, int position) {
         SmsCategory category = list.get(position);
         holder.smsCategory.setText(category.getCategoryName());
+        if (isEditIconVisible) {
+            holder.editIcon.setVisibility(View.VISIBLE);
+            holder.removeIcon.setVisibility(View.VISIBLE);
+        } else {
+            holder.editIcon.setVisibility(View.GONE);
+            holder.removeIcon.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -43,13 +53,22 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return list.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public void enableEditAndRemoveOption(boolean newValue) {
+        this.isEditIconVisible = newValue;
+        this.isRemoveIconVisible = newValue;
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView smsCategory;
+        ImageButton editIcon;
+        ImageButton removeIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
             smsCategory = (TextView) itemView.findViewById(R.id.smsText);
-            itemView.setOnClickListener(this);
+            editIcon = (ImageButton) itemView.findViewById(R.id.edit_btn);
+            removeIcon = (ImageButton) itemView.findViewById(R.id.delete_btn);
+            smsCategory.setOnClickListener(this);
         }
 
         @Override

@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 
 import com.example.nikashkuratova.smsreader.adaptor.CategoryAdapter;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private List<SmsCategory> smsCategory;
-    private CategoryAdapter adapter;
+    private CategoryAdapter categoryAdapter;
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 smsCategory.add(new SmsCategory(data.getStringExtra("categoryName"), data.getStringExtra("searchString")));
-                adapter.notifyDataSetChanged();
+                categoryAdapter.notifyDataSetChanged();
                 String categoriesListtoJson = new Gson().toJson(smsCategory);
                 editor.putString("CategoriesList", categoriesListtoJson);
                 editor.commit();
@@ -81,8 +80,8 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        adapter = new CategoryAdapter(smsCategory, this);
-        recyclerView.setAdapter(adapter);
+        categoryAdapter = new CategoryAdapter(smsCategory, this);
+        recyclerView.setAdapter(categoryAdapter);
     }
 
     @Override
@@ -116,7 +115,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 break;
             case R.id.edit_categories:
-//todo make edit button visible
+                categoryAdapter.enableEditAndRemoveOption(true);
+                categoryAdapter.notifyDataSetChanged();
                 break;
         }
 
