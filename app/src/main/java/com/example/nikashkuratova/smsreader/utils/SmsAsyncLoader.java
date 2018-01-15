@@ -23,8 +23,11 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
 
     @Override
     protected List<SmsMessage> doInBackground(Void... voids) {
-        String WHERE_CONDITION = "address = \"Priorbank\"";
-        Cursor cursor = activity.getContentResolver().query(Uri.parse("content://sms/inbox"), new String[]{"body"}, WHERE_CONDITION, null, null);
+        final String WHERE_CONDITION = "address = \"Priorbank\"";
+        final String [] PROJECTION = new String[]{"body"};
+        final String SMS_URI = "content://sms/inbox";
+
+        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION, null, null);
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 
@@ -43,6 +46,6 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     @Override
     protected void onPostExecute(List<SmsMessage> strings) {
         listener.onTaskCompeted(strings);
-
+        activity = null;
     }
 }
