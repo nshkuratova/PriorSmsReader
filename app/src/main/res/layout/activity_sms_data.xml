@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.nikashkuratova.smsreader.SmsDataActivity">
 
-    <include layout="@layout/content_item_list" />
+    <include layout="@layout/sms_content_item_list" />
 
 </android.support.constraint.ConstraintLayout>

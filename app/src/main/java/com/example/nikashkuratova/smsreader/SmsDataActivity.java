@@ -42,7 +42,7 @@ public class SmsDataActivity extends AppCompatActivity {
             @Override
             public void onTaskCompeted(List<SmsMessage> messages) {
                 RecyclerView recyclerView;
-                recyclerView = (RecyclerView) SmsDataActivity.this.findViewById(R.id.recyclerview);
+                recyclerView = (RecyclerView) SmsDataActivity.this.findViewById(R.id.recyclerview_sms);
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(SmsDataActivity.this);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setHasFixedSize(true);
