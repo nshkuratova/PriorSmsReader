@@ -1,7 +1,5 @@
 package com.example.nikashkuratova.smsreader.pojo;
 
-import android.util.Log;
-
 import java.text.DateFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
