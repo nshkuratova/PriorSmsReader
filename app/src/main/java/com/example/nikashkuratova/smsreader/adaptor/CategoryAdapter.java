@@ -63,6 +63,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void enableEditAndRemoveOption(boolean newValue) {
         this.isEditIconVisible = newValue;
         this.isRemoveIconVisible = newValue;
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

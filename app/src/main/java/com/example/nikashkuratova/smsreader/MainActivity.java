@@ -25,17 +25,15 @@ public class MainActivity extends AppCompatActivity
 
     public static final int ADD_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+    private boolean editMode = false;
 
     private RecyclerView recyclerView;
     private ArrayList<SmsCategory> smsCategory;
     private CategoryAdapter categoryAdapter;
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode) {
             case ADD_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
@@ -48,8 +46,8 @@ public class MainActivity extends AppCompatActivity
             case EDIT_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
                     int id = data.getIntExtra("id", -1);
-                    for (SmsCategory cat: smsCategory){
-                        if (cat.getCatId() == id){
+                    for (SmsCategory cat : smsCategory) {
+                        if (cat.getCatId() == id) {
                             cat.setCategoryName(data.getStringExtra("categoryName"));
                             cat.setSearchString(data.getStringExtra("searchString"));
                         }
@@ -66,8 +64,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-      smsCategory = new ArrayList<SmsCategory>();
-       smsCategory = SharedPrefHelper.readFromSharedPref(this);
+        smsCategory = new ArrayList<SmsCategory>();
+        smsCategory = SharedPrefHelper.readFromSharedPref(this);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -119,7 +117,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.action_settings:
                 break;
             case R.id.edit_categories:
-                categoryAdapter.enableEditAndRemoveOption(true);
+                if (!editMode) {
+                    categoryAdapter.enableEditAndRemoveOption(true);
+                    editMode = true;
+                } else {
+                    categoryAdapter.enableEditAndRemoveOption(false);
+                    editMode = false;
+                }
                 categoryAdapter.notifyDataSetChanged();
                 break;
         }
