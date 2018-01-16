@@ -23,7 +23,7 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
     @Override
     protected List<SmsMessage> doInBackground(String... params) {
         final String WHERE_CONDITION = "address = \"Priorbank\"";
-        final String SEARCH_WORD = params[0].toString().toUpperCase();
+        final String SEARCH_WORD = params[0].toString();
         final String [] PROJECTION = new String[]{"body"};
         final String SMS_URI = "content://sms/inbox";
 
