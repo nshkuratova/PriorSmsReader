@@ -10,6 +10,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATEGORY;
+import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.NO_CATEGORY;
+
 public final class SharedPrefHelper {
     private static SharedPreferences sharedPref;
     private static SharedPreferences.Editor editor;
@@ -29,7 +32,8 @@ public final class SharedPrefHelper {
         Gson gson = new Gson();
         String json = sharedPref.getString("CategoriesList", "");
         if (json.isEmpty()) {
-            smsCategory.add(new SmsCategory());
+            smsCategory.add(new SmsCategory(ALL_SMS_CATEGORY));
+            smsCategory.add(new SmsCategory(NO_CATEGORY));
         } else {
             smsCategory = gson.fromJson(json, new TypeToken<ArrayList<SmsCategory>>() {
             }.getType());

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATEGORY;
 import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_SEARCH_STR;
+import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.NO_CATEGORY;
 
 
 public class MainActivity extends AppCompatActivity
@@ -143,6 +144,13 @@ public class MainActivity extends AppCompatActivity
         String search = "";
         if (catName.equals(ALL_SMS_CATEGORY)) {
             intent.putExtra("searchStr", ALL_SMS_SEARCH_STR);
+        }
+        else if (catName.equals(NO_CATEGORY)) {
+            int i = 0;
+            for (SmsCategory cat : smsCategory) {
+                intent.putExtra(String.valueOf(i), cat.getSearchString());
+                i++;
+            }
         } else {
             for (SmsCategory cat : smsCategory) {
                 if (catName.equals(cat.getCategoryName())) {

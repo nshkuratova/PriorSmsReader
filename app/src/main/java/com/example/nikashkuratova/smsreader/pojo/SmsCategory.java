@@ -5,14 +5,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SmsCategory {
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
     public static final String ALL_SMS_CATEGORY = "Все sms";
+    public static final String NO_CATEGORY = "Без категории";
+
     public static final String ALL_SMS_SEARCH_STR = "";
     private int catId;
     private String categoryName;
     private String searchString;
 
-    public SmsCategory() {
+    public SmsCategory(String categoryName) {
         catId = ID_GENERATOR.getAndIncrement();
-        this.categoryName = ALL_SMS_CATEGORY;
+        this.categoryName = categoryName;
         this.searchString = ALL_SMS_SEARCH_STR;
     }
 
