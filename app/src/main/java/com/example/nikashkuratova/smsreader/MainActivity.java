@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.nikashkuratova.smsreader.adaptor.CategoryAdapter;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
@@ -18,6 +19,9 @@ import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 import com.example.nikashkuratova.smsreader.utils.SharedPrefHelper;
 
 import java.util.ArrayList;
+
+import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATEGORY;
+import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_SEARCH_STR;
 
 
 public class MainActivity extends AppCompatActivity
@@ -134,11 +138,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void recyclerViewListClicked(View view, int position) {
-        if (position == 0) {
-            Intent intent = new Intent(this, SmsDataActivity.class);
-            startActivity(intent);
+        String catName = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(view.getId())).getText().toString();
+        Intent intent = new Intent(this, SmsDataActivity.class);
+        String search = "";
+        if (catName.equals(ALL_SMS_CATEGORY)) {
+            intent.putExtra("searchStr", ALL_SMS_SEARCH_STR);
+        } else {
+            for (SmsCategory cat : smsCategory) {
+                if (catName.equals(cat.getCategoryName())) {
+                    search = cat.getSearchString();
+                }
+            }
+            intent.putExtra("searchStr", search);
         }
-
+        startActivity(intent);
     }
 }
 

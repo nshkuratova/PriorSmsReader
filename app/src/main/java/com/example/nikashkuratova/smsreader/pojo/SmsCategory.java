@@ -4,14 +4,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SmsCategory {
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
+    public static final String ALL_SMS_CATEGORY = "Все sms";
+    public static final String ALL_SMS_SEARCH_STR = "";
     private int catId;
     private String categoryName;
     private String searchString;
 
     public SmsCategory() {
         catId = ID_GENERATOR.getAndIncrement();
-        this.categoryName = "Все sms";
-        this.searchString = "";
+        this.categoryName = ALL_SMS_CATEGORY;
+        this.searchString = ALL_SMS_SEARCH_STR;
     }
 
     public SmsCategory(String pNname, String pSearchString) {
@@ -40,7 +42,4 @@ public class SmsCategory {
         return catId;
     }
 
-    public void setCatId(int catId) {
-        this.catId = catId;
-    }
 }

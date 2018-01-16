@@ -11,7 +11,7 @@ import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
+public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
     private Activity activity;
     private OnAsyncTaskCompleted listener;
 
@@ -21,12 +21,13 @@ public class SmsAsyncLoader extends AsyncTask<Void, Void, List<SmsMessage>> {
     }
 
     @Override
-    protected List<SmsMessage> doInBackground(Void... voids) {
+    protected List<SmsMessage> doInBackground(String... params) {
         final String WHERE_CONDITION = "address = \"Priorbank\"";
+        final String SEARCH_WORD = params[0].toString().toUpperCase();
         final String [] PROJECTION = new String[]{"body"};
         final String SMS_URI = "content://sms/inbox";
 
-        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION, null, null);
+        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + " and body like '%" + SEARCH_WORD + "%'", null, null);
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 
