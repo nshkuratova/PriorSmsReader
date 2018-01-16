@@ -20,7 +20,7 @@ public class SmsDataActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_SMS = 0;
     private OnAsyncTaskCompleted listener;
-    String searchStr;
+    String searchStrList[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,19 @@ public class SmsDataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        searchStr = getIntent().getStringExtra("searchStr");
+        searchStrList = new String[getIntent().getIntExtra("arraySize", 0)];
+
+        for (int i = 0; i < searchStrList.length; i++) {
+            searchStrList[i] = getIntent().getStringExtra(String.valueOf(i));
+        }
+        //searchStr = getIntent().getStringExtra("searchStr");
         if (PermissionCheckHelper.checkSmsPermissionGranted(this)) {
-            showSMS(searchStr);
+            showSMS();
         }
     }
 
 
-    private void showSMS(String searchStr) {
+    private void showSMS() {
         listener = new OnAsyncTaskCompleted() {
             @Override
             public void onTaskCompeted(List<SmsMessage> messages) {
@@ -64,7 +69,7 @@ public class SmsDataActivity extends AppCompatActivity {
 
             }
         };
-        new SmsAsyncLoader(this, listener).execute(searchStr);
+        new SmsAsyncLoader(this, listener).execute(searchStrList);
     }
 
 
@@ -76,7 +81,7 @@ public class SmsDataActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showSMS(searchStr);
+                    showSMS();
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 

@@ -23,11 +23,24 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
     @Override
     protected List<SmsMessage> doInBackground(String... params) {
         final String WHERE_CONDITION = "address = \"Priorbank\"";
-        final String SEARCH_WORD = params[0].toString();
+        String searchWord = "";
+        String searchCriteria;
+        String searchPositiveCriteria = " and body like '%";
+        String searchNegativeCriteria = " and body not like ";
         final String[] PROJECTION = new String[]{"body"};
         final String SMS_URI = "content://sms/inbox";
 
-        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + " and body like '%" + SEARCH_WORD + "%'", null, null);
+        if (params.length > 1) {
+            for (int i = 0; i >= params.length; i++) {
+                searchWord += "'%" + params[i] + "%'";
+            }
+            searchCriteria = searchNegativeCriteria;
+        } else {
+            searchWord = params[0].toString();
+            searchCriteria = searchPositiveCriteria;
+        }
+
+        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchCriteria + searchWord + "%'", null, null);
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 

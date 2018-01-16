@@ -142,14 +142,17 @@ public class MainActivity extends AppCompatActivity
         String catName = ((TextView) recyclerView.findViewHolderForAdapterPosition(position).itemView.findViewById(view.getId())).getText().toString();
         Intent intent = new Intent(this, SmsDataActivity.class);
         String search = "";
+        int i = 0;
         if (catName.equals(ALL_SMS_CATEGORY)) {
-            intent.putExtra("searchStr", ALL_SMS_SEARCH_STR);
-        }
-        else if (catName.equals(NO_CATEGORY)) {
-            int i = 0;
+            intent.putExtra(String.valueOf(i), ALL_SMS_SEARCH_STR);
+            intent.putExtra("arraySize", 1);
+        } else if (catName.equals(NO_CATEGORY)) {
             for (SmsCategory cat : smsCategory) {
-                intent.putExtra(String.valueOf(i), cat.getSearchString());
-                i++;
+                if (!cat.getSearchString().isEmpty() || cat.getSearchString() != "") {
+                    intent.putExtra(String.valueOf(i), cat.getSearchString());
+                    i++;
+                }
+                intent.putExtra("arraySize", i);
             }
         } else {
             for (SmsCategory cat : smsCategory) {
@@ -157,7 +160,8 @@ public class MainActivity extends AppCompatActivity
                     search = cat.getSearchString();
                 }
             }
-            intent.putExtra("searchStr", search);
+            intent.putExtra(String.valueOf(i), search);
+            intent.putExtra("arraySize", 1);
         }
         startActivity(intent);
     }
