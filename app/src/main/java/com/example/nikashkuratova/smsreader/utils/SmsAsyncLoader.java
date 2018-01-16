@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
@@ -30,17 +31,22 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
         final String[] PROJECTION = new String[]{"body"};
         final String SMS_URI = "content://sms/inbox";
 
+        //todo fix bug
         if (params.length > 1) {
-            for (int i = 0; i >= params.length; i++) {
-                searchWord += "'%" + params[i] + "%'";
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < params.length; i++) {
+                if (!params[i].equals("")) {
+                    stringBuilder.append(searchNegativeCriteria);
+                    stringBuilder.append("'%" + params[i] + "%'");
+                }
             }
-            searchCriteria = searchNegativeCriteria;
+            stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+            searchWord = stringBuilder.toString();
         } else {
-            searchWord = params[0].toString();
-            searchCriteria = searchPositiveCriteria;
+            searchWord = searchPositiveCriteria + params[0].toString();
         }
 
-        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchCriteria + searchWord + "%'", null, null);
+        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchWord + "%'", null, null);
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 

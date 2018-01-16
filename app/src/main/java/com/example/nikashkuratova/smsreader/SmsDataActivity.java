@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
@@ -39,12 +40,12 @@ public class SmsDataActivity extends AppCompatActivity {
         }
         //searchStr = getIntent().getStringExtra("searchStr");
         if (PermissionCheckHelper.checkSmsPermissionGranted(this)) {
-            showSMS();
+            showSMS(searchStrList);
         }
     }
 
 
-    private void showSMS() {
+    private void showSMS(String [] searchStrList) {
         listener = new OnAsyncTaskCompleted() {
             @Override
             public void onTaskCompeted(List<SmsMessage> messages) {
@@ -81,7 +82,7 @@ public class SmsDataActivity extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showSMS();
+                    showSMS(searchStrList);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
