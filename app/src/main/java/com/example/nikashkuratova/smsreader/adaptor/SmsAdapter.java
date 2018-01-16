@@ -1,4 +1,4 @@
-package com.example.nikashkuratova.smsreader.Adaptor;
+package com.example.nikashkuratova.smsreader.adaptor;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.nikashkuratova.smsreader.Pojo.SmsMessage;
 import com.example.nikashkuratova.smsreader.R;
+import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            smsMessage = (TextView) itemView.findViewById(R.id.smsText);
+            smsMessage = (TextView) itemView.findViewById(R.id.catName);
         }
 
     }
