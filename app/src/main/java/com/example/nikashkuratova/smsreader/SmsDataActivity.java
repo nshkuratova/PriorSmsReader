@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
 import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
@@ -12,6 +13,7 @@ import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 import com.example.nikashkuratova.smsreader.utils.PermissionCheckHelper;
 import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class SmsDataActivity extends AppCompatActivity {
@@ -49,6 +51,17 @@ public class SmsDataActivity extends AppCompatActivity {
 
                 SmsAdapter adapter = new SmsAdapter(messages);
                 recyclerView.setAdapter(adapter);
+                double sum = 0;
+
+                for (SmsMessage sms : messages) {
+                    sum += sms.getSum();
+                }
+
+                DecimalFormat formatter = new DecimalFormat("#0.00");
+
+                TextView sumView = (TextView) findViewById(R.id.all_sms_sum);
+                sumView.setText(String.valueOf(formatter.format(sum)) + " BYN");
+
             }
         };
         new SmsAsyncLoader(this, listener).execute(searchStr);

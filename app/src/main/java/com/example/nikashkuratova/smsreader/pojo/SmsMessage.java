@@ -25,6 +25,10 @@ public class SmsMessage {
         }
     }
 
+    public double getSum() {
+        return sum;
+    }
+
     public String getSmsText() {
         return smsText;
     }
