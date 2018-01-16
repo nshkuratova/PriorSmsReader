@@ -8,7 +8,7 @@
     android:paddingTop="10dp">
 
     <TextView
-        android:id="@+id/smsText"
+        android:id="@+id/catName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -23,7 +23,7 @@
         android:id="@+id/delete_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/smsText"
+        android:layout_alignEnd="@+id/catName"
         android:visibility="gone"
         android:src="@drawable/ic_remove_circle_outline_black_24dp" />
 

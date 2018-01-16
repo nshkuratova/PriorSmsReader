@@ -44,7 +44,7 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            smsMessage = (TextView) itemView.findViewById(R.id.smsText);
+            smsMessage = (TextView) itemView.findViewById(R.id.catName);
         }
 
     }

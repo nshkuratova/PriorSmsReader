@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SmsDataActivity" />
-        <activity android:name=".AddCategoryActivity"></activity>
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".EditCategoryActivity"></activity>
     </application>
 
 </manifest>

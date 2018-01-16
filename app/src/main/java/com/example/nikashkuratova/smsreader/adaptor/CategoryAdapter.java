@@ -1,6 +1,8 @@
 package com.example.nikashkuratova.smsreader.adaptor;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,22 +10,27 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.nikashkuratova.smsreader.EditCategoryActivity;
 import com.example.nikashkuratova.smsreader.R;
 import com.example.nikashkuratova.smsreader.listener.RecyclerViewClickListener;
 import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 
 import java.util.List;
 
+import static com.example.nikashkuratova.smsreader.MainActivity.EDIT_ACTIVITY_REQUEST_CODE;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private static RecyclerViewClickListener itemListener;
+    private Activity activity;
     private List<SmsCategory> list;
     private Boolean isEditIconVisible = false;
     private Boolean isRemoveIconVisible = false;
 
-    public CategoryAdapter(List<SmsCategory> list, RecyclerViewClickListener listener) {
+    public CategoryAdapter(List<SmsCategory> list, RecyclerViewClickListener listener, Activity activity) {
         this.list = list;
         this.itemListener = listener;
+        this.activity = activity;
     }
 
     @Override
@@ -65,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-            smsCategory = (TextView) itemView.findViewById(R.id.smsText);
+            smsCategory = (TextView) itemView.findViewById(R.id.catName);
             editIcon = (ImageButton) itemView.findViewById(R.id.edit_btn);
             removeIcon = (ImageButton) itemView.findViewById(R.id.delete_btn);
             smsCategory.setOnClickListener(this);
@@ -75,6 +82,30 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     list.remove(getAdapterPosition());
                     notifyItemRemoved(getAdapterPosition());
                     notifyItemRangeChanged(getAdapterPosition(), list.size());
+                }
+            });
+
+            editIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int id = getAdapterPosition();
+                    String catName = smsCategory.getText().toString();
+                    String searchStr = "";
+
+                    for (SmsCategory sms : list) {
+                        if (catName.equals(sms.getCategoryName())) {
+                            id = sms.getCatId();
+                            searchStr = sms.getSearchString();
+                        }
+                    }
+
+                    Intent intent = new Intent(activity, EditCategoryActivity.class);
+                    intent.putExtra("catId", id);
+                    intent.putExtra("catName", catName);
+                    intent.putExtra("searchStr", searchStr);
+
+                    activity.startActivityForResult(intent, EDIT_ACTIVITY_REQUEST_CODE);
                 }
             });
         }

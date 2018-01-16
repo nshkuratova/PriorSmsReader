@@ -14,7 +14,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
-        Button btn = (Button) this.findViewById(R.id.submit);
+        Button btn = (Button) this.findViewById(R.id.submitAdd);
         final EditText categoryName = (EditText) findViewById(R.id.enterName);
         final EditText searchString = (EditText) findViewById(R.id.enterSearchString);
 
