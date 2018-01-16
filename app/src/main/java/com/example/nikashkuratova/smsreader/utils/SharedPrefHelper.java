@@ -14,7 +14,7 @@ public final class SharedPrefHelper {
     private static SharedPreferences sharedPref;
     private static SharedPreferences.Editor editor;
 
-    public static void saveToSharedPref(ArrayList<SmsCategory> list, Activity activity){
+    public static void saveToSharedPref(ArrayList<SmsCategory> list, Activity activity) {
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
         String categoriesListtoJson = new Gson().toJson(list);
@@ -22,9 +22,10 @@ public final class SharedPrefHelper {
         editor.commit();
     }
 
-    public static ArrayList<SmsCategory> readFromSharedPref(){
+    public static ArrayList<SmsCategory> readFromSharedPref(Activity activity) {
         ArrayList<SmsCategory> smsCategory = new ArrayList<SmsCategory>();
-
+        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
         Gson gson = new Gson();
         String json = sharedPref.getString("CategoriesList", "");
         if (json.isEmpty()) {
