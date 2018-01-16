@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
             break;
             case EDIT_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
-                    int id = data.getIntExtra("elementID", -1);
+                    int id = data.getIntExtra("id", -1);
                     for (SmsCategory cat: smsCategory){
                         if (cat.getCatId() == id){
                             cat.setCategoryName(data.getStringExtra("categoryName"));
