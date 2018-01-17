@@ -12,6 +12,7 @@ public class SmsMessage {
     private double sum;
     private DateFormat date;
 
+    //todo pojo class shoud not contain business logic (create utilit class for it)
     public SmsMessage(String smsText) {
         this.smsText = smsText;
         Pattern pattern = Pattern.compile(SUM_REGEX_PATTERN);

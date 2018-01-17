@@ -8,8 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class EditCategoryActivity extends AppCompatActivity {
-
+    public static final String cat_Name_key = "catId";
     @Override
+
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_category);
@@ -19,7 +20,8 @@ public class EditCategoryActivity extends AppCompatActivity {
         final EditText editSearchStr = (EditText) this.findViewById(R.id.editSearchString);
 
         Intent intent = getIntent();
-        final int catId = intent.getIntExtra("catId", -1);
+        // todo create constants "catId", "catName"
+        final int catId = intent.getIntExtra(cat_Name_key, -1);
         String catName = intent.getStringExtra("catName");
         String searchStr = intent.getStringExtra("searchStr");
 

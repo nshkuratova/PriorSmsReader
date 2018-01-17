@@ -20,7 +20,7 @@ import java.util.List;
 import static com.example.nikashkuratova.smsreader.MainActivity.EDIT_ACTIVITY_REQUEST_CODE;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-
+// todo remove static modifier
     private static RecyclerViewClickListener itemListener;
     private Activity activity;
     private List<SmsCategory> list;
@@ -77,6 +77,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             editIcon = (ImageButton) itemView.findViewById(R.id.edit_btn);
             removeIcon = (ImageButton) itemView.findViewById(R.id.delete_btn);
             smsCategory.setOnClickListener(this);
+            //todo pass all acions to activity through RecyclerViewClickListener and handle it there (move listeners ti activity)
             removeIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -102,7 +103,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     }
 
                     Intent intent = new Intent(activity, EditCategoryActivity.class);
-                    intent.putExtra("catId", id);
+                    intent.putExtra(EditCategoryActivity.cat_Name_key, id);
                     intent.putExtra("catName", catName);
                     intent.putExtra("searchStr", searchStr);
 

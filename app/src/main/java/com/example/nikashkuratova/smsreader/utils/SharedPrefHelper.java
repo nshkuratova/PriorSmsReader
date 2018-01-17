@@ -14,6 +14,7 @@ import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATE
 import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.NO_CATEGORY;
 
 public final class SharedPrefHelper {
+    //todo remove unecessary fields
     private static SharedPreferences sharedPref;
     private static SharedPreferences.Editor editor;
 
@@ -22,12 +23,14 @@ public final class SharedPrefHelper {
         editor = sharedPref.edit();
         String categoriesListtoJson = new Gson().toJson(list);
         editor.putString("CategoriesList", categoriesListtoJson);
+        // todo use apply instead commit
         editor.commit();
     }
 
     public static ArrayList<SmsCategory> readFromSharedPref(Activity activity) {
         ArrayList<SmsCategory> smsCategory = new ArrayList<SmsCategory>();
         sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        // todo not usedc editor
         editor = sharedPref.edit();
         Gson gson = new Gson();
         String json = sharedPref.getString("CategoriesList", "");

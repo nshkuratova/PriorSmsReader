@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/enter_category_name_hint" />
 
+    <!--todo Add hint-->
     <EditText
         android:id="@+id/enterSearchString"
         android:maxLines="1"

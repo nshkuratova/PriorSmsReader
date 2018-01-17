@@ -28,6 +28,7 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
         String searchCriteria;
         String searchPositiveCriteria = " and body like '%";
         String searchNegativeCriteria = " and body not like ";
+        // todo move to constants
         final String[] PROJECTION = new String[]{"body"};
         final String SMS_URI = "content://sms/inbox";
 
@@ -68,4 +69,6 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
         listener.onTaskCompeted(strings);
         activity = null;
     }
+
+    //todo add method nullify activity called on activity destroy
 }
