@@ -10,17 +10,17 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_CATEGORY;
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY;
-
+import static com.example.nikashkuratova.smsreader.utils.ObjectCreatorHelper.createDefaultCategories;
 
 public final class SharedPrefHelper {
+
+    public static final String CATEGORIES_LIST_KEY ="CategoriesList";
 
     public static void saveToSharedPref(ArrayList<SmsCategory> list, Activity activity) {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         String categoriesListtoJson = new Gson().toJson(list);
-        editor.putString("CategoriesList", categoriesListtoJson);
+        editor.putString(CATEGORIES_LIST_KEY, categoriesListtoJson);
         editor.apply();
     }
 
@@ -28,10 +28,9 @@ public final class SharedPrefHelper {
         ArrayList<SmsCategory> smsCategory = new ArrayList<SmsCategory>();
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPref.getString("CategoriesList", "");
+        String json = sharedPref.getString(CATEGORIES_LIST_KEY, "");
         if (json.isEmpty()) {
-            smsCategory.add(new SmsCategory(ALL_SMS_CATEGORY));
-            smsCategory.add(new SmsCategory(NO_CATEGORY));
+            smsCategory = createDefaultCategories();
         } else {
             smsCategory = gson.fromJson(json, new TypeToken<ArrayList<SmsCategory>>() {
             }.getType());

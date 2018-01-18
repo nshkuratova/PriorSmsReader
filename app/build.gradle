@@ -33,7 +33,6 @@ dependencies {
     compile 'com.android.support:design:26.+'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     testCompile 'junit:junit:4.12'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 }

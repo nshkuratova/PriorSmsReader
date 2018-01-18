@@ -1,21 +1,12 @@
 package com.example.nikashkuratova.smsreader.pojo;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_SEARCH_STR;
+import static com.example.nikashkuratova.smsreader.utils.ObjectCreatorHelper.ID_GENERATOR;
 
 public class SmsCategory {
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
 
     private int catId;
     private String categoryName;
     private String searchString;
-
-    public SmsCategory(String categoryName) {
-        catId = ID_GENERATOR.getAndIncrement();
-        this.categoryName = categoryName;
-        this.searchString = ALL_SMS_SEARCH_STR;
-    }
 
     public SmsCategory(String pNname, String pSearchString) {
         catId = ID_GENERATOR.getAndIncrement();

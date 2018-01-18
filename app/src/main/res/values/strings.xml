@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">SmsReader</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_charts">Графики</string>
     <string name="edit_categories">Edit</string>
     <string name="enter_category_name_hint">Введите имя категории</string>
-    <string name="enter_search_string_hint">Введите кодовое слово</string>
+    <string name="enter_search_string_hint">Введите слово для поиска</string>
     <string name="addCategory">Добавить категорию</string>
     <string name="editCategory">Изменить категорию</string>
 </resources>

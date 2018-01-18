@@ -10,10 +10,11 @@ import android.widget.TextView;
 import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
 import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
+import com.example.nikashkuratova.smsreader.utils.CalculationsHelper;
+import com.example.nikashkuratova.smsreader.utils.FormatterUtils;
 import com.example.nikashkuratova.smsreader.utils.PermissionCheckHelper;
 import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ARRAY_SIZE;
@@ -58,17 +59,9 @@ public class SmsDataActivity extends AppCompatActivity {
                 SmsAdapter adapter = new SmsAdapter(messages);
                 recyclerView.setAdapter(adapter);
 
-                //TODO move to utils calculation of sum
-                double sum = 0;
-
-                for (SmsMessage sms : messages) {
-                    sum += sms.getSum();
-                }
-
-                DecimalFormat formatter = new DecimalFormat("#0.00");
-
                 TextView sumView = (TextView) findViewById(R.id.all_sms_sum);
-                sumView.setText(String.valueOf(formatter.format(sum)) + " BYN");
+                //todo decide what to do with BYN
+                sumView.setText(String.valueOf(FormatterUtils.formatSum(CalculationsHelper.calculateSumForCategory(messages))) + " BYN");
 
             }
         };

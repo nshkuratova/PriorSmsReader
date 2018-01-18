@@ -120,6 +120,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
+            case R.id.action_charts:
+                startActivity (new Intent(this, ChartsActivity.class));
+                break;
             case R.id.action_settings:
                 break;
             case R.id.edit_categories:
