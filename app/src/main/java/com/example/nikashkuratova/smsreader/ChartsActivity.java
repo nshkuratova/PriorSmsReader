@@ -28,13 +28,15 @@ import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY
 public class ChartsActivity extends AppCompatActivity {
     private OnAsyncTaskCompleted listener;
     HashMap<SmsCategory, Double> sumByCategory;
+    ArrayList<SmsCategory> categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charts);
         HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
-        ArrayList<SmsCategory> categories = SharedPrefHelper.readFromSharedPref(this);
+        categories = SharedPrefHelper.readFromSharedPref(this);
+        sumByCategory = new HashMap<>();
         for (SmsCategory cat: categories){
             getSmsByCategory(cat, cat.getSearchString());
         }

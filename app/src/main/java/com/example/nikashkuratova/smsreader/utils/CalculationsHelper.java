@@ -21,7 +21,6 @@ public final class CalculationsHelper {
     public static HashMap<SmsCategory, Double> calculateSumForAllCategories(ArrayList<SmsCategory> smsCategories){
         HashMap<SmsCategory, Double> sumForCategory = new HashMap<>();
 
-
         return sumForCategory;
     }
 

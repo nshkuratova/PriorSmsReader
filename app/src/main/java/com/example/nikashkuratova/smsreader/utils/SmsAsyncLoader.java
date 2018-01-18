@@ -32,7 +32,6 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
         String searchPositiveCriteria = " and body like";
         String searchNegativeCriteria = " and body not like ";
 
-        //todo fix bug
         if (params.length > 1) {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < params.length; i++) {

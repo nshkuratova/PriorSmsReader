@@ -1,5 +1,6 @@
 package com.example.nikashkuratova.smsreader.listener;
 
+import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 
 import java.util.List;
