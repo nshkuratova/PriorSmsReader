@@ -23,7 +23,10 @@ import java.util.ArrayList;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_CATEGORY;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_SEARCH_STR;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ARRAY_SIZE;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_ID;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_NAME;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRING;
 
 
 public class MainActivity extends AppCompatActivity
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         switch (requestCode) {
             case ADD_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
-                    smsCategory.add(new SmsCategory(data.getStringExtra("categoryName"), data.getStringExtra("searchString")));
+                    smsCategory.add(new SmsCategory(data.getStringExtra(CAT_NAME), data.getStringExtra(SEARCH_STRING)));
                     categoryAdapter.notifyDataSetChanged();
                     SharedPrefHelper.saveToSharedPref(smsCategory, this);
                 }
@@ -51,11 +54,11 @@ public class MainActivity extends AppCompatActivity
             break;
             case EDIT_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
-                    int id = data.getIntExtra("id", -1);
+                    int id = data.getIntExtra(CAT_ID, -1);
                     for (SmsCategory cat : smsCategory) {
                         if (cat.getCatId() == id) {
-                            cat.setCategoryName(data.getStringExtra("categoryName"));
-                            cat.setSearchString(data.getStringExtra("searchString"));
+                            cat.setCategoryName(data.getStringExtra(CAT_NAME));
+                            cat.setSearchString(data.getStringExtra(SEARCH_STRING));
                         }
                     }
                     categoryAdapter.notifyDataSetChanged();

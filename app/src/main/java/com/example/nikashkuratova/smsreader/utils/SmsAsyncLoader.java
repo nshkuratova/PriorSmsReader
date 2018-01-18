@@ -29,7 +29,7 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
     @Override
     protected List<SmsMessage> doInBackground(String... params) {
         String searchWord = "";
-        String searchPositiveCriteria = " and body like '%";
+        String searchPositiveCriteria = " and body like";
         String searchNegativeCriteria = " and body not like ";
 
         //todo fix bug
@@ -41,13 +41,15 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
                     stringBuilder.append("'%" + params[i] + "%'");
                 }
             }
-            stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+            if (stringBuilder.length() >= 2) {
+                stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
+            }
             searchWord = stringBuilder.toString();
-        } else {
-            searchWord = searchPositiveCriteria + params[0].toString();
+        } else if (params.length == 1 & !params[0].equals("")) {
+            searchWord = searchPositiveCriteria + "'%" +  params[0].toString() + "%'";
         }
 
-        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchWord + "%'", null, null);
+        Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchWord, null, null);
         List<SmsMessage> smsArray;
         smsArray = new ArrayList<>();
 
