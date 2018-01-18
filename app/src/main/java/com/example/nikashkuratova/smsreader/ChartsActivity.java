@@ -2,28 +2,21 @@ package com.example.nikashkuratova.smsreader;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
-import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
 import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
 import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;
 import com.example.nikashkuratova.smsreader.utils.CalculationsHelper;
-import com.example.nikashkuratova.smsreader.utils.FormatterUtils;
 import com.example.nikashkuratova.smsreader.utils.SharedPrefHelper;
 import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_CATEGORY;
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_SEARCH_STR;
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ARRAY_SIZE;
-import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY;
+import java.util.Map;
 
 public class ChartsActivity extends AppCompatActivity {
     private OnAsyncTaskCompleted listener;
@@ -37,8 +30,14 @@ public class ChartsActivity extends AppCompatActivity {
         HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
         categories = SharedPrefHelper.readFromSharedPref(this);
         sumByCategory = new HashMap<>();
-        for (SmsCategory cat: categories){
+        for (SmsCategory cat : categories) {
             getSmsByCategory(cat, cat.getSearchString());
+        }
+
+        List<Entry> entries = new ArrayList<Entry>();
+
+        for (Map.Entry<SmsCategory, Double> item : sumByCategory.entrySet()) {
+            //entries.add(new BarEntry()
         }
     }
 
