@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.example.nikashkuratova.smsreader.adaptor.SmsAdapter;
@@ -16,6 +15,8 @@ import com.example.nikashkuratova.smsreader.utils.SmsAsyncLoader;
 
 import java.text.DecimalFormat;
 import java.util.List;
+
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ARRAY_SIZE;
 
 public class SmsDataActivity extends AppCompatActivity {
 
@@ -33,12 +34,11 @@ public class SmsDataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        searchStrList = new String[getIntent().getIntExtra("arraySize", 0)];
+        searchStrList = new String[getIntent().getIntExtra(ARRAY_SIZE, 0)];
 
         for (int i = 0; i < searchStrList.length; i++) {
             searchStrList[i] = getIntent().getStringExtra(String.valueOf(i));
         }
-        //searchStr = getIntent().getStringExtra("searchStr");
         if (PermissionCheckHelper.checkSmsPermissionGranted(this)) {
             showSMS(searchStrList);
         }
@@ -57,6 +57,8 @@ public class SmsDataActivity extends AppCompatActivity {
 
                 SmsAdapter adapter = new SmsAdapter(messages);
                 recyclerView.setAdapter(adapter);
+
+                //TODO move to utils calculation of sum
                 double sum = 0;
 
                 for (SmsMessage sms : messages) {

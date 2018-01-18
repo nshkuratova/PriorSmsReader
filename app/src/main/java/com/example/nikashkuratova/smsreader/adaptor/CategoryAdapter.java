@@ -18,10 +18,13 @@ import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 import java.util.List;
 
 import static com.example.nikashkuratova.smsreader.MainActivity.EDIT_ACTIVITY_REQUEST_CODE;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_ID;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_NAME;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRING;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-// todo remove static modifier
-    private static RecyclerViewClickListener itemListener;
+
+    private RecyclerViewClickListener itemListener;
     private Activity activity;
     private List<SmsCategory> list;
     private Boolean isEditIconVisible = false;
@@ -103,9 +106,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     }
 
                     Intent intent = new Intent(activity, EditCategoryActivity.class);
-                    intent.putExtra(EditCategoryActivity.cat_Name_key, id);
-                    intent.putExtra("catName", catName);
-                    intent.putExtra("searchStr", searchStr);
+                    intent.putExtra(CAT_ID, id);
+                    intent.putExtra(CAT_NAME, catName);
+                    intent.putExtra(SEARCH_STRING, searchStr);
 
                     activity.startActivityForResult(intent, EDIT_ACTIVITY_REQUEST_CODE);
                 }

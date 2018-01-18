@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_NAME;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRING;
+
 public class AddCategoryActivity extends AppCompatActivity {
 
     @Override
@@ -22,8 +25,8 @@ public class AddCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("categoryName", categoryName.getText().toString());
-                intent.putExtra("searchString", searchString.getText().toString());
+                intent.putExtra(CAT_NAME, categoryName.getText().toString());
+                intent.putExtra(SEARCH_STRING, searchString.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
             }

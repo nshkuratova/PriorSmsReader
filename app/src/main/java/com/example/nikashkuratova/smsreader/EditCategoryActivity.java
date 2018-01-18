@@ -7,8 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_ID;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_NAME;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRING;
+
 public class EditCategoryActivity extends AppCompatActivity {
-    public static final String cat_Name_key = "catId";
+
     @Override
 
     protected void onCreate(final Bundle savedInstanceState) {
@@ -20,10 +24,9 @@ public class EditCategoryActivity extends AppCompatActivity {
         final EditText editSearchStr = (EditText) this.findViewById(R.id.editSearchString);
 
         Intent intent = getIntent();
-        // todo create constants "catId", "catName"
-        final int catId = intent.getIntExtra(cat_Name_key, -1);
-        String catName = intent.getStringExtra("catName");
-        String searchStr = intent.getStringExtra("searchStr");
+        final int catId = intent.getIntExtra(CAT_ID, -1);
+        String catName = intent.getStringExtra(CAT_NAME);
+        String searchStr = intent.getStringExtra(SEARCH_STRING);
 
         editCatName.setText(catName);
         editSearchStr.setText(searchStr);
@@ -33,9 +36,9 @@ public class EditCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("id", catId);
-                intent.putExtra("categoryName", editCatName.getText().toString());
-                intent.putExtra("searchString", editSearchStr.getText().toString());
+                intent.putExtra(CAT_ID, catId);
+                intent.putExtra(CAT_NAME, editCatName.getText().toString());
+                intent.putExtra(SEARCH_STRING, editSearchStr.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
             }

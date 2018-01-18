@@ -10,28 +10,23 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATEGORY;
-import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.NO_CATEGORY;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_CATEGORY;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY;
+
 
 public final class SharedPrefHelper {
-    //todo remove unecessary fields
-    private static SharedPreferences sharedPref;
-    private static SharedPreferences.Editor editor;
 
     public static void saveToSharedPref(ArrayList<SmsCategory> list, Activity activity) {
-        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        editor = sharedPref.edit();
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
         String categoriesListtoJson = new Gson().toJson(list);
         editor.putString("CategoriesList", categoriesListtoJson);
-        // todo use apply instead commit
-        editor.commit();
+        editor.apply();
     }
 
     public static ArrayList<SmsCategory> readFromSharedPref(Activity activity) {
         ArrayList<SmsCategory> smsCategory = new ArrayList<SmsCategory>();
-        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-        // todo not usedc editor
-        editor = sharedPref.edit();
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPref.getString("CategoriesList", "");
         if (json.isEmpty()) {

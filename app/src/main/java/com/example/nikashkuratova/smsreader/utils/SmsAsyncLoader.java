@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.nikashkuratova.smsreader.listener.OnAsyncTaskCompleted;
 import com.example.nikashkuratova.smsreader.pojo.SmsMessage;

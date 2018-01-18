@@ -20,9 +20,10 @@ import com.example.nikashkuratova.smsreader.utils.SharedPrefHelper;
 
 import java.util.ArrayList;
 
-import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_CATEGORY;
-import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.ALL_SMS_SEARCH_STR;
-import static com.example.nikashkuratova.smsreader.pojo.SmsCategory.NO_CATEGORY;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_CATEGORY;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ALL_SMS_SEARCH_STR;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.ARRAY_SIZE;
+import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.NO_CATEGORY;
 
 
 public class MainActivity extends AppCompatActivity
@@ -145,14 +146,14 @@ public class MainActivity extends AppCompatActivity
         int i = 0;
         if (catName.equals(ALL_SMS_CATEGORY)) {
             intent.putExtra(String.valueOf(i), ALL_SMS_SEARCH_STR);
-            intent.putExtra("arraySize", 1);
+            intent.putExtra(ARRAY_SIZE, 1);
         } else if (catName.equals(NO_CATEGORY)) {
             for (SmsCategory cat : smsCategory) {
                 if (!cat.getSearchString().isEmpty() || cat.getSearchString() != "") {
                     intent.putExtra(String.valueOf(i), cat.getSearchString());
                     i++;
                 }
-                intent.putExtra("arraySize", i);
+                intent.putExtra(ARRAY_SIZE, i);
             }
         } else {
             for (SmsCategory cat : smsCategory) {
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             intent.putExtra(String.valueOf(i), search);
-            intent.putExtra("arraySize", 1);
+            intent.putExtra(ARRAY_SIZE, 1);
         }
         startActivity(intent);
     }
