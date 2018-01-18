@@ -61,7 +61,7 @@ public class SmsDataActivity extends AppCompatActivity {
 
                 TextView sumView = (TextView) findViewById(R.id.all_sms_sum);
                 //todo decide what to do with BYN
-                sumView.setText(String.valueOf(FormatterUtils.formatSum(CalculationsHelper.calculateSumForCategory(messages))) + " BYN");
+                sumView.setText(String.valueOf(FormatterUtils.formatSum(CalculationsHelper.calculateSumForMessages(messages))) + " BYN");
 
             }
         };

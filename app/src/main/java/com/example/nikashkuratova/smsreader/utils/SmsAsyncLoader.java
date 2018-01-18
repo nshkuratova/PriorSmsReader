@@ -12,8 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
+
+    public final String WHERE_CONDITION = "address = \"Priorbank\"";
+    public final String[] PROJECTION = new String[]{"body"};
+    public final String SMS_URI = "content://sms/inbox";
+
     private Activity activity;
     private OnAsyncTaskCompleted listener;
+
 
     public SmsAsyncLoader(Activity pActivity, OnAsyncTaskCompleted pListener) {
         activity = pActivity;
@@ -22,14 +28,9 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
 
     @Override
     protected List<SmsMessage> doInBackground(String... params) {
-        final String WHERE_CONDITION = "address = \"Priorbank\"";
         String searchWord = "";
-        String searchCriteria;
         String searchPositiveCriteria = " and body like '%";
         String searchNegativeCriteria = " and body not like ";
-        // todo move to constants
-        final String[] PROJECTION = new String[]{"body"};
-        final String SMS_URI = "content://sms/inbox";
 
         //todo fix bug
         if (params.length > 1) {
