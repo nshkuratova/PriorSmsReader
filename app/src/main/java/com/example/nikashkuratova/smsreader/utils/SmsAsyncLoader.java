@@ -40,12 +40,12 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
                     stringBuilder.append("'%" + params[i] + "%'");
                 }
             }
-            if (stringBuilder.length() >= 2) {
+     /*       if (stringBuilder.length() >= 2) {
                 stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
-            }
+            }*/
             searchWord = stringBuilder.toString();
         } else if (params.length == 1 & !params[0].equals("")) {
-            searchWord = searchPositiveCriteria + "'%" +  params[0].toString() + "%'";
+            searchWord = searchPositiveCriteria + "'%" + params[0].toString() + "%'";
         }
 
         Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchWord, null, null);
