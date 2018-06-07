@@ -24,7 +24,7 @@
         <activity android:name=".SmsDataActivity" />
         <activity android:name=".AddCategoryActivity" />
         <activity android:name=".EditCategoryActivity" />
-        <activity android:name=".ChartsActivity"></activity>
+        <activity android:name=".PieChartActivity"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PriorSmsReader.iml" filepath="$PROJECT_DIR$/PriorSmsReader.iml" />
       <module fileurl="file://D:\Sunshine\PriorSmsReader\.idea\PriorSmsReader.iml" filepath="D:\Sunshine\PriorSmsReader\.idea\PriorSmsReader.iml" />
-      <module fileurl="file://D:\dev\PriorSmsReader\PriorSmsReader.iml" filepath="D:\dev\PriorSmsReader\PriorSmsReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

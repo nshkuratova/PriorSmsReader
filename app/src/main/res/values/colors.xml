@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#ff669900</color>
     <color name="colorAccent">#ff4081</color>
     <color name="colorTextPanel">#f2e937</color>
+
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yellow">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="pinkaccent">#ff4081</color>
 </resources>

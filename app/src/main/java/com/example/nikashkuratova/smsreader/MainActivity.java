@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
+/*        switch (requestCode) {
             case ADD_ACTIVITY_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
                     smsCategory.add(new SmsCategory(data.getStringExtra(CAT_NAME), data.getStringExtra(SEARCH_STRING)));
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             }
-        }
+        }*/
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity
         smsCategory = SharedPrefHelper.readFromSharedPref(this);
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setHasFixedSize(true);
 
         categoryAdapter = new CategoryAdapter(smsCategory, this, this);
-        recyclerView.setAdapter(categoryAdapter);
+        recyclerView.setAdapter(categoryAdapter);*/
     }
 
     @Override
@@ -105,13 +105,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop() {
         super.onStop();
-        SharedPrefHelper.saveToSharedPref(smsCategory, this);
+     /*   SharedPrefHelper.saveToSharedPref(smsCategory, this);*/
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SharedPrefHelper.saveToSharedPref(smsCategory, this);
+        /*SharedPrefHelper.saveToSharedPref(smsCategory, this);*/
     }
 
     @Override
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.action_charts:
-                startActivity (new Intent(this, ChartsActivity.class));
+                startActivity (new Intent(this, PieChartActivity.class));
                 break;
             case R.id.action_settings:
                 break;
