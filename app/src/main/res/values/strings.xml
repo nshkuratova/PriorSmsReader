@@ -7,4 +7,10 @@
     <string name="enter_search_string_hint">Введите слово для поиска</string>
     <string name="addCategory">Добавить категорию</string>
     <string name="editCategory">Изменить категорию</string>
+    <string name="categoryList">Категории</string>
+    <string name="smsNoCategory">Sms без категории</string>
+    <string name="reports">Отчеты</string>
+    <string name="categoryListPrompt">Список существующих категорий</string>
+    <string name="smsNoCategoryPrompt">Сюда попадают все смс без категории</string>
+    <string name="reportsPrompt">Разные отчеты</string>
 </resources>

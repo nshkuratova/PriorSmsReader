@@ -7,6 +7,7 @@
 
     <color name="backgroundcolor">#fcfcfc</color>
     <color name="lightgray">#ededed</color>
+    <color name="darkgray">#c6c5c5</color>
     <color name="deeppurple">#7c4dff</color>
     <color name="yellow">#ffb300</color>
     <color name="green">#00bfa5</color>
