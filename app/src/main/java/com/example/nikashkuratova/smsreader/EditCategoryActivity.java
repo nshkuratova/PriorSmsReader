@@ -14,7 +14,6 @@ import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRI
 public class EditCategoryActivity extends AppCompatActivity {
 
     @Override
-
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_category);
