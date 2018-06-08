@@ -108,7 +108,7 @@ public class CategoryListActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -120,11 +120,6 @@ public class CategoryListActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_charts:
-                startActivity(new Intent(this, PieChartActivity.class));
-                break;
-            case R.id.action_settings:
-                break;
             case R.id.edit_categories:
                 if (!editMode) {
                     categoryAdapter.enableEditAndRemoveOption(true);

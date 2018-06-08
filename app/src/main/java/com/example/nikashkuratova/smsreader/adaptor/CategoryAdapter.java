@@ -17,7 +17,7 @@ import com.example.nikashkuratova.smsreader.pojo.SmsCategory;
 
 import java.util.List;
 
-import static com.example.nikashkuratova.smsreader.MainActivity.EDIT_ACTIVITY_REQUEST_CODE;
+import static com.example.nikashkuratova.smsreader.CategoryListActivity.EDIT_ACTIVITY_REQUEST_CODE;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_ID;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.CAT_NAME;
 import static com.example.nikashkuratova.smsreader.utils.UtilsHelper.SEARCH_STRING;
