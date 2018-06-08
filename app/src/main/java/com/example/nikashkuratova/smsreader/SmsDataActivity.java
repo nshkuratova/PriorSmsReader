@@ -41,9 +41,6 @@ public class SmsDataActivity extends AppCompatActivity {
             for (int i = 0; i < searchStrList.length; i++) {
                 searchStrList[i] = getIntent().getStringExtra(String.valueOf(i));
             }
-        } else {
-            searchStrList = new String[1];
-            searchStrList[0] = "";
         }
         if (PermissionCheckHelper.checkSmsPermissionGranted(this)) {
             showSMS(searchStrList);
