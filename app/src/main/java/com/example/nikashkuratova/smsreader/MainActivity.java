@@ -22,10 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         smsCategory = new ArrayList<SmsCategory>();
-        smsCategory = SharedPrefHelper.readFromSharedPref(this);
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,18 +59,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                     intent.putExtra(ARRAY_SIZE, i);
                 }
-
                 startActivity(intent);
             }
         });
-
-
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
+        smsCategory = SharedPrefHelper.readFromSharedPref(this);
     }
 
     @Override

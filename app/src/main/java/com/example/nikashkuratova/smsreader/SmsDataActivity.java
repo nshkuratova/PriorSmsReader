@@ -35,10 +35,15 @@ public class SmsDataActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        searchStrList = new String[getIntent().getIntExtra(ARRAY_SIZE, 0)];
+        if (getIntent().getIntExtra(ARRAY_SIZE, 0) != 0) {
+            searchStrList = new String[getIntent().getIntExtra(ARRAY_SIZE, 0)];
 
-        for (int i = 0; i < searchStrList.length; i++) {
-            searchStrList[i] = getIntent().getStringExtra(String.valueOf(i));
+            for (int i = 0; i < searchStrList.length; i++) {
+                searchStrList[i] = getIntent().getStringExtra(String.valueOf(i));
+            }
+        } else {
+            searchStrList = new String[1];
+            searchStrList[0] = "";
         }
         if (PermissionCheckHelper.checkSmsPermissionGranted(this)) {
             showSMS(searchStrList);
@@ -46,7 +51,7 @@ public class SmsDataActivity extends AppCompatActivity {
     }
 
 
-    private void showSMS(String [] searchStrList) {
+    private void showSMS(String[] searchStrList) {
         listener = new OnAsyncTaskCompleted() {
             @Override
             public void onTaskCompeted(List<SmsMessage> messages) {
