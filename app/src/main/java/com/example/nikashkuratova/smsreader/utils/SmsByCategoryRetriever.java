@@ -17,7 +17,6 @@ public final class SmsByCategoryRetriever {
 
     public static ArrayList<SmsMessage> retrieveSms(SmsCategory smsCategory, Activity activity) {
         String searchWord = "";
-        String searchPositiveCriteria = " and body like";
         String searchNegativeCriteria = " and body not like ";
 
         StringBuilder stringBuilder = new StringBuilder();

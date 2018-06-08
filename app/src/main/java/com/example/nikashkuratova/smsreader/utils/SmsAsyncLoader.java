@@ -14,6 +14,7 @@ import java.util.List;
 public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
 
     public final String WHERE_CONDITION = "address = \"Priorbank\"";
+    public final String SEARCH_CONDITION = "'%Oplata%'";
     public final String[] PROJECTION = new String[]{"body"};
     public final String SMS_URI = "content://sms/inbox";
 
@@ -40,12 +41,17 @@ public class SmsAsyncLoader extends AsyncTask<String, Void, List<SmsMessage>> {
                     stringBuilder.append("'%" + params[i] + "%'");
                 }
             }
+            stringBuilder.append(searchPositiveCriteria);
+            stringBuilder.append("'%Oplata%'");
      /*       if (stringBuilder.length() >= 2) {
                 stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "");
             }*/
             searchWord = stringBuilder.toString();
         } else if (params.length == 1 & !params[0].equals("")) {
             searchWord = searchPositiveCriteria + "'%" + params[0].toString() + "%'";
+        }
+        else {
+            searchWord = searchPositiveCriteria + SEARCH_CONDITION;
         }
 
         Cursor cursor = activity.getContentResolver().query(Uri.parse(SMS_URI), PROJECTION, WHERE_CONDITION + searchWord, null, null);
