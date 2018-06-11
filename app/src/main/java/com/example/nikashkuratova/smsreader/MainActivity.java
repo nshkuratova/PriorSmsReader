@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         reportsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PieChartActivity.class);
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                //Intent intent = new Intent(MainActivity.this, PieChartActivity.class);
                 startActivity(intent);
             }
         });
